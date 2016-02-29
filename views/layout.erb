@@ -4,6 +4,15 @@
   <title>Flags</title>
 </head>
 <body>
-<%= yield %>
+	<p>The current user is <%= @user %></p>
+
+	<% if @message%>
+	<p>You have a new message
+		<blockquote>
+			<%= @message %>
+		</blockquote>
+	</p>
+	<% end -%>
+	<%= yield %>
 </body>
 </html>
