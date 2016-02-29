@@ -9,6 +9,24 @@ IMAGES = [
 
 class App < Sinatra::Base
 
+	before do
+		@user = "Sufian Ahmad"
+		puts "==> starting request"
+	end
+
+	after do
+		puts "<== ending request"
+	end
+
+	get /images/ do
+		@message = "You are viewing flags"
+	end
+
+	get "/" do
+		erb :hello, layout: true
+		
+	end
+
 	get '/images' do
 		@images = IMAGES
 		erb :images
