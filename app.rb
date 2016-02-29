@@ -1,4 +1,5 @@
 require "sinatra/base"
+require "bundler/setup"
 
 IMAGES = [
 	{title: "Pakistan", url: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSNmBHKBx-xBaxQE-WIP3OKJMwctai92-775p6cVTq1SxJlqlT0bw"},
@@ -13,8 +14,10 @@ class App < Sinatra::Base
 		erb :images
 	end
 
-	get '/images/:index' do |index|
+	get "/images/:index" do |index|
+		index = index.to_i
 		@image = IMAGES[index]
+		haml :"images/show", layout: true
 	end
 
 end
