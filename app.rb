@@ -1,0 +1,20 @@
+require "sinatra/base"
+
+IMAGES = [
+	{title: "Pakistan", url: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSNmBHKBx-xBaxQE-WIP3OKJMwctai92-775p6cVTq1SxJlqlT0bw"},
+	{title: "Maxico", url: "http://3.bp.blogspot.com/_rUW6DgdRSGc/TLi-dYYTI_I/AAAAAAAADSM/te9EwO56QfE/s1600/Flag-Mexico.png"},
+	{title: "Japan", url: "http://www.thecountriesof.com/wp-content/uploads/2013/11/Japan-Flag.gif"}
+]
+
+class App < Sinatra::Base
+
+	get '/images' do
+		@images = IMAGES
+		erb :images
+	end
+
+	get '/images/:index' do |index|
+		@image = IMAGES[index]
+	end
+
+end
