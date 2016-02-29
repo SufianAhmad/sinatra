@@ -1,7 +1,7 @@
 <h1>Flages</h1>
-<% @images.each do |image| %>
-<h2> <%= image[:title]%> </h2>
+<% @images.each_with_index do |image, index| %>
+<h2><a href="/images/<%= index %>"><%= image[:title]%></a></h2>
 <P>
-    <img src="<%= image[:url]%>"/>
+    <img src="<%= image[:url]%>" width="40"/>
 </P> 
 <% end -%>
