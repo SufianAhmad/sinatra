@@ -9,8 +9,10 @@ IMAGES = [
 
 class App < Sinatra::Base
 
+	enable :sessions
 	before do
 		@user = "Sufian Ahmad"
+		@height = session[:height]
 		puts "==> starting request"
 	end
 
@@ -24,6 +26,15 @@ class App < Sinatra::Base
 
 	get "/" do
 		erb :hello, layout: true
+		
+	end
+
+	get '/sessions/new' do
+		erb :"sessions/new"
+	end
+
+	post '/sessions' do
+		session[:height] = params[:height]
 		
 	end
 
