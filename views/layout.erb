@@ -12,6 +12,9 @@
 		<li>
 			<%=@height%>
 		</li>
+		<li>
+			The current environment is <%= @environment %> 
+		</li>
 	</ul>
 
 	<% if @message%>
@@ -21,6 +24,12 @@
 		</blockquote>
 	</p>
 	<% end %>
-	<%= yield %>
+
+	<% if @environment == :rpoduction %>
+		<pre>
+			<%= request.inspect %>
+		</pre>
+	<% end %>
+		<%= yield %>
 </body>
 </html>
