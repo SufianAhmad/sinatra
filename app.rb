@@ -43,12 +43,10 @@ class App < Sinatra::Base
 		# @message = "You are viewing flags"
 		erb :images
 	end
-
 	get "/images/:index.?:format?" do |index, format|
 		index = index.to_i
 		@image = IMAGES[index]
 		@index = index
-
 		if format == "jpeg"
 			content_type :jpeg
 			send_file "images/#{index}.jpeg"
@@ -56,7 +54,6 @@ class App < Sinatra::Base
 			haml :"images/show", layout: true		
 		end	
 	end
-
 	get "/images/:index/download" do |index|
 		@image = IMAGES[index.to_i]
 		attachment @image[:title]
