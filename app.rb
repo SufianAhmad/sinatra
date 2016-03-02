@@ -27,8 +27,7 @@ class App < Sinatra::Base
 	# end
 
 	get "/" do
-		erb :hello, layout: true
-		
+		erb :hello, layout: true	
 	end
 
 	get '/sessions/new' do
@@ -36,8 +35,7 @@ class App < Sinatra::Base
 	end
 
 	post '/sessions' do
-		session[:height] = params[:height]
-		
+		session[:height] = params[:height]	
 	end
 
 	get '/images' do
@@ -45,27 +43,20 @@ class App < Sinatra::Base
 		# @message = "You are viewing flags"
 		erb :images
 	end
-
 	get "/images/:index.?:format?" do |index, format|
 		index = index.to_i
 		@image = IMAGES[index]
 		@index = index
-
 		if format == "jpeg"
 			content_type :jpeg
 			send_file "images/#{index}.jpeg"
 		else
 			haml :"images/show", layout: true		
-		end
-		
+		end	
 	end
-
 	get "/images/:index/download" do |index|
-
 		@image = IMAGES[index.to_i]
 		attachment @image[:title]
 		send_file "images/#{index}.jpeg"
-		
 	end
-
 end
