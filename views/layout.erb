@@ -13,19 +13,18 @@
 			<%=@height%>
 		</li>
 		<li>
-			The current environment is <%= @environment %> 
+			The current environment is: <%= @environment %> 
 		</li>
 	</ul>
-
 	<% if @message%>
-	<p>You have a new message
-		<blockquote>
-			<%= @message %>
-		</blockquote>
-	</p>
+		<p>You have a new message
+			<blockquote>
+				<%= @message %>
+			</blockquote>
+		</p>
 	<% end %>
 
-	<% if @environment == :rpoduction %>
+	<% if @environment == :poduction %>
 		<pre>
 			<%= request.inspect %>
 		</pre>
