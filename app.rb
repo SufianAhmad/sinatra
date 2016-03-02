@@ -2,9 +2,9 @@ require "sinatra/base"
 require "bundler/setup"
 
 IMAGES = [
-	{title: "Pakistan", url: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSNmBHKBx-xBaxQE-WIP3OKJMwctai92-775p6cVTq1SxJlqlT0bw"},
-	{title: "Maxico", url: "http://3.bp.blogspot.com/_rUW6DgdRSGc/TLi-dYYTI_I/AAAAAAAADSM/te9EwO56QfE/s1600/Flag-Mexico.png"},
-	{title: "Japan", url: "http://www.thecountriesof.com/wp-content/uploads/2013/11/Japan-Flag.gif"}
+	{title: "Flower", url: "/images/0.jpeg"},
+	{title: "Linux", url: "/images/1.jpeg"},
+	{title: "Linux1", url: "/images/2.jpeg"}
 ]
 
 class App < Sinatra::Base
@@ -20,9 +20,9 @@ class App < Sinatra::Base
 		puts "<== ending request"
 	end
 
-	get /images/ do
-		@message = "You are viewing flags"
-	end
+	# get /images/ do
+	# 	@message = "You are viewing flags"
+	# end
 
 	get "/" do
 		erb :hello, layout: true
@@ -40,13 +40,30 @@ class App < Sinatra::Base
 
 	get '/images' do
 		@images = IMAGES
+		# @message = "You are viewing flags"
 		erb :images
 	end
 
-	get "/images/:index" do |index|
+	get "/images/:index.?:format?" do |index, format|
 		index = index.to_i
 		@image = IMAGES[index]
-		haml :"images/show", layout: true
+		@index = index
+
+		if format == "jpeg"
+			content_type :jpeg
+			send_file "images/#{index}.jpeg"
+		else
+			haml :"images/show", layout: true		
+		end
+		
+	end
+
+	get "/images/:index/download" do |index|
+
+		@image = IMAGES[index.to_i]
+		attachment @image[:title]
+		send_file "images/#{index}.jpeg"
+		
 	end
 
 end

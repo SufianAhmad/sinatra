@@ -1,0 +1,39 @@
+GIT
+  remote: git://github.com/sinatra/sinatra.git
+  revision: 4c7d38eb1b2cc02ce51029f28e0c3c34ca12ccfd
+  specs:
+    sinatra (2.0.0.pre.alpha)
+      rack (= 2.0.0.alpha)
+      rack-protection (~> 1.5)
+      tilt (~> 2.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    daemons (1.2.3)
+    eventmachine (1.0.9.1)
+    haml (4.0.7)
+      tilt
+    json (1.8.3)
+    log4r (1.1.10)
+    rack (2.0.0.alpha)
+      json
+    rack-protection (1.5.3)
+      rack
+    thin (1.6.2)
+      daemons (>= 1.0.9)
+      eventmachine (>= 1.0.0)
+      rack (>= 1.0.0)
+    tilt (2.0.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  haml
+  log4r
+  sinatra!
+  thin
+
+BUNDLED WITH
+   1.11.2
