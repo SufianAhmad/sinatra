@@ -13,6 +13,8 @@ class App < Sinatra::Base
 	before do
 		@user = "Sufian Ahmad"
 		@height = session[:height]
+		@environment = settings.environment
+		@request = request
 		puts "==> starting request"
 	end
 
