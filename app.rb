@@ -10,6 +10,7 @@ IMAGES = [
 class App < Sinatra::Base
 
 	enable :sessions
+  disable :show_exceptions
 	before do
 		@user = "Sufian Ahmad"
 		@height = session[:height]
@@ -21,10 +22,6 @@ class App < Sinatra::Base
 	after do
 		puts "<== ending request"
 	end
-
-	# get /images/ do
-	# 	@message = "You are viewing flags"
-	# end
 
 	get "/" do
 		erb :hello, layout: true	
@@ -39,10 +36,28 @@ class App < Sinatra::Base
 	end
 
 	get '/images' do
+    halt 403 if session[:height].nil?
 		@images = IMAGES
 		# @message = "You are viewing flags"
 		erb :images
 	end
+
+  not_found do
+    haml :"404", layout: true, layout_engine: :erb
+  end
+
+  error do 
+    haml :error, layout: true, layout_engine: :erb
+  end
+
+  error 403 do
+    haml :"403", layout: true, layout_engine: :erb
+  end
+
+  get "/500" do
+    raise StandardError,"Intentional erro"
+  end
+
 	get "/images/:index.?:format?" do |index, format|
 		index = index.to_i
 		@image = IMAGES[index]
