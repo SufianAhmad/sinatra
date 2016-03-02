@@ -11,6 +11,7 @@ class App < Sinatra::Base
 
 	enable :sessions
   disable :show_exceptions
+  
 	before do
 		@user = "Sufian Ahmad"
 		@height = session[:height]
@@ -55,7 +56,7 @@ class App < Sinatra::Base
   end
 
   get "/500" do
-    raise StandardError,"Intentional erro"
+    raise StandardError, "Intentional erro"
   end
 
 	get "/images/:index.?:format?" do |index, format|
