@@ -14,6 +14,24 @@ class App < Sinatra::Base
   register Sinatra::Prawn
   register Sinatra::Namespace
 
+  helpers Sinatra::ContentFor
+  helpers Sinatra::JSON
+
+  helpers do
+
+    def protected!
+      unless authorized?
+        response["WWW-Authenticate"] = %(Basic realm="Admins Only!")
+        halt 401
+      end
+    end
+
+    def authorized?
+      @auth ||= Rack::Auth::Basic::Request.new(request.env)
+      @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ["admin", "admin"]
+    end
+  end
+
   before do
     @user = "Sufian Ahmad"
     @height = session[:height]
@@ -56,6 +74,7 @@ class App < Sinatra::Base
     end
 
     post do
+      protected!
       @image = Image.create params[:image]
       redirect "/images"
     end
