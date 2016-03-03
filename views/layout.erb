@@ -4,31 +4,31 @@
   <title>Flags</title>
 </head>
 <body>
-	<p>The current user is <%= @user %></p>
-	<ul>
-		<li>
-			<a href="/sessions/new">New Session</a>
-		</li>
-		<li>
-			<%=@height%>
-		</li>
-		<li>
-			The current environment is: <%= @environment %> 
-		</li>
-	</ul>
-	<% if @message%>
-		<p>You have a new message
-			<blockquote>
-				<%= @message %>
-			</blockquote>
-		</p>
-	<% end %>
+  <p>The current user is <%= @user %></p>
+  <ul>
+    <li>
+      <a href="/sessions/new">New Session</a>
+    </li>
+    <li>
+      <%=@height%>
+    </li>
+    <li>
+      The current environment is: <%= @environment %> 
+    </li>
+  </ul>
+  <% if @message%>
+    <p>You have a new message
+      <blockquote>
+        <%= @message %>
+      </blockquote>
+    </p>
+  <% end %>
 
-	<% if @environment == :poduction %>
-		<pre>
-			<%= request.inspect %>
-		</pre>
-	<% end %>
-		<%= yield %>
+  <% if @environment == :poduction %>
+    <pre>
+      <%= request.inspect %>
+    </pre>
+  <% end %>
+    <%= yield %>
 </body>
 </html>
