@@ -36,7 +36,7 @@ class App < Sinatra::Base
 	post '/sessions' do
 		session[:height] = params[:height]	
 	end
-  
+
   get "/sample.pdf" do
     content_type :pdf
     @message = "This is a PDF extention"
