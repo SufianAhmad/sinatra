@@ -11,6 +11,8 @@ class App < Sinatra::Base
 
 	enable :sessions
   disable :show_exceptions
+  register Sinatra::Prawn
+
 	before do
 		@user = "Sufian Ahmad"
 		@height = session[:height]
