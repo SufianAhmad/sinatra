@@ -18,7 +18,6 @@ class App < Sinatra::Base
   helpers Sinatra::JSON
 
   helpers do
-
     def protected!
       unless authorized?
         response["WWW-Authenticate"] = %(Basic realm="Admins Only!")
