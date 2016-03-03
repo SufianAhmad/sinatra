@@ -2,9 +2,9 @@ require "sinatra/base"
 require "bundler/setup"
 
 IMAGES = [
-  {title: "Flower", url: "/images/0.jpeg"},
-  {title: "Linux", url: "/images/1.jpeg"},
-  {title: "Linux1", url: "/images/2.jpeg"}
+  { title: "Flower", url: "/images/0.jpeg" },
+  { title: "Linux", url: "/images/1.jpeg" },
+  { title: "Linux1", url: "/images/2.jpeg" }
 ]
 
 class App < Sinatra::Base
@@ -27,15 +27,15 @@ class App < Sinatra::Base
   end
 
   get "/" do
-    erb :hello, layout: true	
+    erb :hello, layout: true
   end
 
-  get '/sessions/new' do
+  get "/sessions/new" do
     erb :"sessions/new"
   end
 
-  post '/sessions' do
-    session[:height] = params[:height]	
+  post "/sessions" do
+    session[:height] = params[:height]
   end
 
   get "/sample.pdf" do
@@ -61,7 +61,7 @@ class App < Sinatra::Base
     end
   end
 
-  get '/images' do
+  get "/images" do
     halt 403 if session[:height].nil?
     @images = IMAGES
     # @message = "You are viewing flags"
@@ -92,9 +92,9 @@ class App < Sinatra::Base
       content_type :jpeg
       send_file "images/#{index}.jpeg"
     else
-      haml :"images/show", layout: true		
-    end	
-end
+      haml :"images/show", layout: true
+    end
+  end
   get "/images/:index/download" do |index|
     @image = IMAGES[index.to_i]
     attachment @image[:title]
