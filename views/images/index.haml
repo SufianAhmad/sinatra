@@ -1,0 +1,26 @@
+%h1 Images
+
+-if @images.count == 0
+  %h4 You have no images
+
+-@images.each do |image|
+  %h2 
+    %a{ href: "/images/#{image.id}" }=image[:title]
+  %p
+    %img{ src: image[:url], width: 40}
+  %blockquote=image[:desc]
+
+%h2 Store a new image
+
+%form.row( action="/images" method="post" )
+  %p.six.columns
+    %lable Title
+    %input( type="text" placeholder="Enter a title" name="image[title]" )
+  %p.six.columns
+    %lable URL
+    %input( type="text" placeholder="Enter url here" name="image[url]" )
+  %p.twelve.columns
+    %lable Description
+    %input( type="text" placeholder="Enter Description here" rows="3" name="image[desc]" )
+  %p.six.columns
+    %input.button( type="submit" value="Create Image" )

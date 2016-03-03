@@ -12,6 +12,7 @@ class App < Sinatra::Base
 	enable :sessions
   disable :show_exceptions
   register Sinatra::Prawn
+  register Sinatra::Namespace
 
 	before do
 		@user = "Sufian Ahmad"
@@ -41,6 +42,23 @@ class App < Sinatra::Base
     content_type :pdf
     @message = "This is a PDF extention"
     prawn :samplepdf
+  end
+
+  namespace "/images" do
+    get do
+      @images = Image.all
+      haml :"/images/index", layout_engine: :erb
+    end
+
+    get "/:id" do |id|
+      @image = Image.get(id)
+      haml %s(images/show), layout_engine: :erb
+    end
+
+    post do
+      @image = Image.create params[:image]
+      redirect "/images"
+    end
   end
 
 	get '/images' do
