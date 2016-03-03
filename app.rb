@@ -37,6 +37,12 @@ class App < Sinatra::Base
 		session[:height] = params[:height]	
 	end
 
+  get "/sample.pdf" do
+    content_type :pdf
+    @message = "This is a PDF extention"
+    prawn :samplepdf
+  end
+
 	get '/images' do
     halt 403 if session[:height].nil?
 		@images = IMAGES
