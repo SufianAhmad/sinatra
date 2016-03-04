@@ -62,6 +62,21 @@ class App < Sinatra::Base
   end
 
   namespace "/images" do
+    get ".json" do
+      @images = Image.all
+      json @images
+    end
+
+    get "/:id.json" do |id|
+      @image = Image.get(id)
+      json @image
+    end
+
+    post ".json" do
+      @image = Image.create params[:image]
+      json message: "Image Successfuly created"
+    end
+
     get do
       @images = Image.all
       haml :"/images/index", layout_engine: :erb
